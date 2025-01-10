@@ -1,59 +1,59 @@
 import random
+import time
+
 length_of_sequence_number = 6
 length_of_secret_combination = 4
-try_number = 10
+try_number = 4
+code = []
 
 
 print(f'\t\t{"-"*10}BIENVENUE DANS LE JEU MASTERMIND{"-"*10}')
 # definitions de la liste des nombres aleatoires
-list_of_number = []
-list_of_number = random.sample(range(0, 10), length_of_sequence_number)
-
-print(f'{"-"*10}Devinez la combinaison secrete à {length_of_secret_combination} chiffres a partir de la liste suivants {"-"*10}')
+print(f'{"-"*10}Devinez la combinaison secrete à {length_of_secret_combination} chiffres {"-"*10}')
+time.sleep(1)
 print(
-    f'-----------------------------------{list_of_number} -----------------------------------')
-print(f'Vous avez {try_number} tentatives. Bonne chance!!')
+    f'----------------------------------------------------------------------')
+print()
+for _ in range(0, length_of_secret_combination):
+    code.append(random.randint(0, length_of_sequence_number))
 
-
-# [9, 3, 5, 8, 0, 4]
-# fonction qui renvoit la combinaison secrete
-
-
-def secret_combination():
-    # #creation de 4  index aleatoire das la liste de nombre pour former la combinaison secrete
-    index_aleatoire = random.sample(
-        range(0, len(list_of_number)), length_of_secret_combination)
-    # combinaison secrete
-    return [(list_of_number[index]) for index in index_aleatoire]
-
-
-combinaison_secrete = secret_combination()
-print(f"combinaison secret est : {combinaison_secrete}")
-
-# fonction pour recuperer la proposition de l'utilisateur
-# def get_user_input():
-#     """
-#         :recuperer la saisais du user
-#         :verifier la saisis du user
-#         :taiter la saisis du user
-        
-#     """
-check = False
-while check == False:
-    user_input = input(f"Saisir la combinaison a {length_of_secret_combination} chiffres: ")
-    if len(user_input) == length_of_secret_combination:
-        for char in user_input:
-            if type(char) == int:
-                if char in list_of_number:
-                    if user_input.index(char) ==  combinaison_secrete.index(char):
-                        print("c'est bon")
-                        check = True 
-                else:
-                    print("vous avez saisis un chiffres qui n'est pas dans la liste")
-            else:  
-                print("Entrez un combinaison de chiffres")
+print(code)  
+for i in range(0, try_number):
+    print(f" Vous avez {try_number-i} tentative")
+    
+    try:
+        # Demande à l'utilisateur de saisir un nombre
+        user_input = int(input("Veuillez saisir un entier : "))
+        print(f"Vous avez saisi l'entier : {user_input}")
+        user_input = list(str(user_input))
+        user_input =  [int(i) for i in user_input]
+        help_code = user_input
+        if len(user_input) != len(code):
+            print(f"Saisir  {length_of_secret_combination} chiffres ")
+        elif user_input == code: 
+                print("vous avez gagner")
+                break
+        else: 
+            for i, char in enumerate(user_input):
+                if char == code[i]: 
+                    _code[i]= char  
+                else:     
+                    help_code[i]= "*"
+            print(f"Guide: {help_code}")   
                 
-    else: 
-        print(f"votre saisie n'est pas de {length_of_secret_combination} chiffres verifier...") 
+      
+    
+
+
+
+    except ValueError:
+        # Message d'erreur en cas de saisie incorrecte
+        print("Erreur : Veuillez entrer un nombre entier valide.")
+        continue
         
-                     
+    
+       
+    
+        
+        
+    
